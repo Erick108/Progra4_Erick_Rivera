@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💰 Calculadora de Recibo de Luz - María Julia</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💡 Calculadora de Recibo de Luz</h1>
+            <div class="nombre-largo">
+                María Julia Antonia Hernández Gutiérrez<br>de todos Los Ángeles y Santos
+            </div>
+        </header>
+        
+        <div class="alerta">
+            ⚡ ¡Hola María Julia! Ingresa tus datos para saber si te están cobrando correctamente tu recibo de luz.
+        </div>
+        
+        <div class="input-group">
+            <label for="kilowatts">Kilowatts consumidos en tu casa:</label>
+            <input type="number" id="kilowatts" placeholder="Ej: 350" min="0" step="0.1">
+        </div>
+        
+        <div class="input-group">
+            <label for="fechaPago">¿Estás pagando dentro de la fecha límite?</label>
+            <select id="fechaPago">
+                <option value="si">✅ Sí, dentro de la fecha límite</option>
+                <option value="no">⚠️ No, estoy pagando fuera de fecha (aplica mora del 20%)</option>
+            </select>
+        </div>
+        
+        <button class="btn-calcular" id="btnCalcular">
+            🔍 Calcular mi recibo de luz
+        </button>
+        
+        <div class="resultado" id="resultado">
+            <h2>📄 Tu recibo de luz</h2>
+            <div class="detalle" id="detalleKw"></div>
+            <div class="detalle" id="detalleBase"></div>
+            <div class="detalle" id="detalleMora"></div>
+            <div class="detalle" id="detalleTotal"></div>
+            <div class="monto-total" id="montoTotal"></div>
+            <div id="mensajeFinal"></div>
+        </div>
+        
+        <footer>
+            <p>Hecho con ❤️ para María Julia Antonia Hernández Gutiérrez de todos Los Ángeles y Santos</p>
+            <p>Protegiendo tus derechos como consumidora ⚖️</p>
+        </footer>
+    </div>
+
+    <script src="recibo_luz.js"></script>
+</body>
+</html>

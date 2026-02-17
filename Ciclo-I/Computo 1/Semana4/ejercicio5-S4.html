@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Personas</title>
+    <link rel="stylesheet" href="estilos4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Lista de Personas</h1>
+        
+        <div class="filtros">
+            <div class="filtro-input">
+                <label for="busqueda">Buscar:</label>
+                <input type="text" id="busqueda" placeholder="Escribe para buscar...">
+            </div>
+            
+            <div class="filtro-select">
+                <label for="filtro">Filtrar por:</label>
+                <select id="filtro">
+                    <option value="todos">Todos</option>
+                    <option value="nombre">Nombre</option>
+                    <option value="edad">Edad</option>
+                    <option value="ciudad">Ciudad</option>
+                    <option value="profesion">Profesión</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="resultados">
+            <div id="listaPersonas"></div>
+        </div>
+    </div>
+</body>
+<script src="script5-S4.js"></script>
+</html>

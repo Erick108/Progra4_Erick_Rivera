@@ -1,0 +1,74 @@
+******CONFIGURACION DE ROUTER 2911********
+enable
+configure terminal
+hostname R2
+no ip domain-lookup
+ip domain-name UGB.com
+username erick privilege 15 secret acdefg1234
+service password-encryption
+enable secret cisco
+crypto key generate rsa
+512
+ip ssh version 2
+line console 0
+login local
+exec-timeout 5 0
+logging synchronous
+exit
+line vty 0 4
+transport input ssh
+login local
+exec-timeout 5 0
+exit
+banner motd # ACCESO SOLO A PERSONAL AUTORIZADO #
+end
+write memory
+
+int G0/0
+no shut
+ip add 192.168.10.1 255.255.255.0
+Login invalid
+
+******CONFIGURACION DE SWITCH 2690**********
+enable
+configure terminal
+hostname SW2
+no ip domain-lookup
+ip domain-name UGB.com
+username erick privilege 15 secret acdefg1234
+service password-encryption
+enable secret cisco
+crypto key generate rsa
+512
+ip ssh version 2
+line console 0
+login local
+exec-timeout 5 0
+logging synchronous
+exit
+line vty 0 4
+transport input ssh
+login local
+exec-timeout 5 0
+exit
+interface vlan1
+no shut
+ip add 192.168.20.2 255.255.255.0
+exit
+ip default-gateway 192.168.20.1
+end
+
+***********CONEXION ENTRE ROUTERS************
+ROUTER-1******
+int G0/1
+no shut
+ip add 10.0.0.1 255.255.255.252
+exit
+ip route 0.0.0.0 0.0.0.0 G0/1
+
+ROUTER-2******
+int G0/1
+no shut
+ip add 10.0.0.2 255.255.255.252
+exit
+ip route 0.0.0.0 0.0.0.0 G0/1

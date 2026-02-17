@@ -1,0 +1,25 @@
+body{
+    background-color: rgb(25, 25, 76);
+}
+h1{
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 35px;
+}
+h2{
+    color: white;
+    font-family: cursive;
+    font-style: italic;
+    font-size: 15px;
+}
+h3{
+    color: white;
+}
+a{
+    color: blue;
+    font-size: 15px;
+}
+a:hover{
+    color: red;
+    font-size: 20px;
+}

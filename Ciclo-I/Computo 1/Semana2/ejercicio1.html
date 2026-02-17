@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelAgency</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Agencia de viajes</h1>
+    <h2>Calculo de cuenta por viaje</h2>
+
+    <p>Tarifas</p>
+    <!-- HTML -->
+    <div id="contenedor"></div>
+    
+    <label id="label1" for="nombre">Nombre:</label>
+    <input type="text" id="nombre" placeholder="Escriba el nombre del cliente">
+    <label id="label2" for="localidad">Localidad:</label>
+    <input type="text" id="localidad" placeholder="¿Que localidad visita?">
+    <label id="label3" for="tarifa">Tarifa:</label>
+    <input type="number" id="tarifa" placeholder="Tarifa por localidad">
+    <label id="label4" for="pagoadelantado">Pago por adelantado:</label>
+    <input type="text" id="pagoadelantado" placeholder="¿Paga por adelantado?">
+    <button id="btnCalcular">Calcular</button>
+
+    <P> El total a pagar de <span id="cliente">cliente</span> ,por visitar <span id="lugar">lugar</span></P>
+    <p>Es: $<span id="resultado">0</span></p>
+</body>
+<script src="script1.js"></script>
+</html>

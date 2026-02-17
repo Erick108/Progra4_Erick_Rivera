@@ -1,0 +1,88 @@
+/*General*/
+.siguiente {
+    background-color: rgb(0, 94, 255);
+    width: 150px;
+   height: 50px;
+   border-radius: 5%;
+   color: white;
+   border-color: rgb(0, 94, 255);
+   font-size: 25px;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.anterior{
+    background-color: rgb(250, 60, 43);
+    width: 150px;
+   height: 50px;
+   border-radius: 5%;
+   color: white;
+   border-color: rgb(250, 60, 43);
+   font-size: 25px;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+/* Semaforo */
+.base{
+   width: 180px;
+   height: 520px;
+   background-color: rgb(42, 38, 38); 
+   border-radius: 1%;
+   gap: 20px;
+   justify-content: center;
+    margin: 30px;
+    padding: 5px;
+}
+
+ .circulo {
+    width: 150px;
+    height: 150px;
+    border-radius: 500%;
+    margin-top: 20px;
+    margin-left: 14px;
+    transition: opacity 0.3s ease; /* Para que el cambio sea suave */
+    cursor: pointer;
+}
+
+/* Colores iniciales */
+.rojo { background-color: red; }
+.amarillo { background-color: yellow; }
+.verde { background-color: rgb(14, 233, 14); }
+
+.oscuro {
+            opacity: 0.2;
+            filter: grayscale(80%); /* Opcional: para que se vean más apagados */
+        }
+/*---------------------------------------*/
+
+/*Galeria*/
+.contenedor-galeria {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 30px;
+        }
+
+        /* Imagen Principal (Siempre al 100% de opacidad) */
+        #visor-principal {
+            width: 600px;
+            height: 400px;
+            object-fit: cover;
+            border: 4px solid #222;
+            margin-bottom: 20px;
+        }
+
+        .fila-miniaturas {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Estilo base de las miniaturas */
+        .miniatura {
+            width: 120px;
+            height: 80px;
+            cursor: pointer;
+            transition: opacity 0.3s ease; /* Transición suave */
+        }
+
+        /* EFECTO SOLICITADO: Solo la miniatura se opaca al pasar el mouse */
+        .miniatura:hover {
+            opacity: 0.4; /* Se vuelve semitransparente */
+        }

@@ -1,0 +1,236 @@
+********PRACTICA SEMANA 5****************
+********CONFIGURACION DE ROUTER 1********
+ena
+conf t
+host R1
+INT G0/0/0
+NO SHUT
+ip add 10.0.0.1 255.255.255.255.252
+exit
+int g0/1/0
+no shut
+ip add 20.0.0.1 255.255.255.252
+exit
+int g0/0
+no shut
+ip add 192.168.1.1 255.255.255.0
+exit
+int g0/1
+no shut
+ip add 192.168.2.1 255.255.255.0
+exit
+int g0/2
+no shut
+ip add 1192.168.3.1 255.255.255.0
+exit
+
+router rip
+versión 2
+no auto
+net 10.0.0.0
+net 20.0.0.0
+net 192.168.1.0
+net 192.168.2.0
+net 192.168.3.0
+exit
+
+ip dhcp excluded-address 192.168.1.1 192.168.1.9
+ip dhcp excluded-address 192.168.2.1 192.168.2.9
+ip dhcp excluded-address 192.168.3.1 192.168.3.9
+
+
+ip dhcp pool LAN1
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 172.16.10.10
+exit
+
+
+ip dhcp pool LAN2
+ network 192.168.2.0 255.255.255.0
+ default-router 192.168.2.1
+ dns-server 172.16.20.10
+exit
+
+
+ip dhcp pool LAN3
+ network 192.168.3.0 255.255.255.0
+ default-router 192.168.3.1
+ dns-server 172.16.30.10
+exit
+
+********CONFIGURACION DE ROUTER 2********
+ena
+conf t
+host R2
+INT G0/0/0
+NO SHUT
+ip add 10.0.0.2 255.255.255.255.252
+exit
+int g0/1/0
+no shut
+ip add 30.0.0.1 255.255.255.252
+exit
+int g0/0
+no shut
+ip add 192.168.4.1 255.255.255.0
+exit
+int g0/1
+no shut
+ip add 192.168.5.1 255.255.255.0
+exit
+int g0/2
+no shut
+ip add 192.168.6.1 255.255.255.0
+exit
+
+router rip
+versión 2
+no auto
+net 10.0.0.0
+net 30.0.0.0
+net 192.168.4.0
+net 192.168.5.0
+net 192.168.6.0
+exit
+
+ip dhcp excluded-address 192.168.4.1 192.168.4.9
+ip dhcp excluded-address 192.168.5.1 192.168.5.9
+ip dhcp excluded-address 192.168.6.1 192.168.6.9
+
+
+ip dhcp pool LAN4
+ network 192.168.4.0 255.255.255.0
+ default-router 192.168.4.1
+ dns-server 172.16.10.10
+exit
+
+
+ip dhcp pool LAN5
+ network 192.168.5.0 255.255.255.0
+ default-router 192.168.5.1
+ dns-server 172.16.20.10
+exit
+
+
+ip dhcp pool LAN6
+ network 192.168.3.0 255.255.255.0
+ default-router 192.168.6.1
+ dns-server 172.16.30.10
+exit
+
+********CONFIGURACION DE ROUTER 3********
+ena
+conf t
+host R3
+INT G0/0/0
+NO SHUT
+ip add 40.0.0.1 255.255.255.255.252
+exit
+int g0/1/0
+no shut
+ip add 20.0.0.2 255.255.255.252
+exit
+int g0/0
+no shut
+ip add 192.168.7.1 255.255.255.0
+exit
+int g0/1
+no shut
+ip add 192.168.8.1 255.255.255.0
+exit
+int g0/2
+no shut
+ip add 192.168.9.1 255.255.255.0
+exit
+
+router rip
+versión 2
+no auto
+net 20.0.0.0
+net 40.0.0.0
+net 192.168.7.0
+net 192.168.8.0
+net 192.168.9.0
+exit
+
+ip dhcp excluded-address 192.168.7.1 192.168.7.9
+ip dhcp excluded-address 192.168.8.1 192.168.8.9
+ip dhcp excluded-address 192.168.9.1 192.168.9.9
+
+
+ip dhcp pool LAN7
+ network 192.168.4.0 255.255.255.0
+ default-router 192.168.7.1
+ dns-server 172.16.10.10
+exit
+
+
+ip dhcp pool LAN8
+ network 192.168.5.0 255.255.255.0
+ default-router 192.168.8.1
+ dns-server 172.16.20.10
+exit
+
+
+ip dhcp pool LAN9
+ network 192.168.3.0 255.255.255.0
+ default-router 192.168.9.1
+ dns-server 172.16.30.10
+exit
+
+********CONFIGURACION DE ROUTER 4********
+ena
+conf t
+host R4
+int G0/0/0
+no shut
+ip add 40.0.0.2 255.255.255.252
+exit
+int G0/1/0
+no shut
+ip add 30.0.0.2 255.255.255.252
+exit
+int G0/0
+no shut
+ip add 192.168.10.1 255.255.255.0
+exit
+int G0/1
+no shut
+ip add 192.168.11.1 255.255.255.0
+exit
+int G0/2
+no shut
+ip add 192.168.12.1 255.255.255.0
+exit
+router rip
+version 2
+no auto
+net 30.0.0.0
+net 40.0.0.0
+net 192.168.10.0
+net 192.168.11.0
+net 192.168.12.0
+exit
+
+ip dhcp excluded-address 192.168.10.1 192.168.10.9
+ip dhcp excluded-address 192.168.11.1 192.168.11.9
+ip dhcp excluded-address 192.168.12.1 192.168.12.9
+
+ip dhcp pool LAN10
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server172.16.10.10
+exit
+
+ip dhcp pool LAN11
+network 192.168.11.0 255.255.255.0
+default-router 192.168.11.1
+dns-server172.16.20.10
+exit
+
+ip dhcp pool LAN12
+network 192.168.12.0 255.255.255.0
+default-router 192.168.12.1
+dns-server172.16.30.10
+exit

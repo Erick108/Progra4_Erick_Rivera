@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Mi autobiografia</title>
+</head>
+<body>
+    <!-- Realizar una pagina autobiografica utilizando
+     diferentes etiquetas y estilos
+    -->
+    <h1>Mi Autobiografia</h1>
+    <h2>Por: Erick Josué Rivera Velasquez</h2>
+    <h3>Indice:</h3>
+    <ul>
+        <li>Parte 1</li>
+        <li>Parte 2</li>
+        <li>Parte 3</li>
+    </ul>
+    <a href="https://www.ejemplo.com">Visita Ejemplo.com"</a>
+
+    <form action="/enviar" method="post">
+    <label id="label1" for="nombre">Nombre:</label>
+    <label id="label2" for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre">
+    <button id="btnclick" type="submit">Enviar</button>
+</body>
+<script>
+    let boton = document.getElementById("btnclick")
+
+    boton.addEventListener("click",function(){
+        alert("Haz hecho un click!")
+    })
+</script>
+</html>
