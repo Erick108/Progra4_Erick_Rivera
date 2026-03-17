@@ -1,0 +1,403 @@
+*********PARCIAL**********
+*********SSH**************
+enable
+configure terminal
+hostname R7
+no ip domain-lookup
+ip domain-name UGB.com
+username erick privilege 15 secret !3R-149658
+username isabel privilege 15 secret $Y0-154831
+username karen privilege 15 secret %K4-198420
+username moises privilege 15 secret &M0-209654
+service password-encryption
+enable secret cisco
+crypto key generate rsa
+512
+ip ssh version 2
+line console 0
+login local
+exec-timeout 5 0
+logging synchronous
+exit
+line vty 0 4
+transport input ssh
+login local
+exec-timeout 5 0
+exit
+banner motd # ACCESO SOLO A PERSONAL AUTORIZADO #
+end
+write memory
+*********CONFIGURACION DE ROUTER 1**********
+conf t
+int G0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+
+int G0/1
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+
+int G0/2
+ip address 192.168.3.1 255.255.255.0
+no shutdown
+
+int G0/0/0
+ip address 10.0.0.1 255.255.255.252
+no shutdown
+
+int G0/1/0
+ip address 70.0.0.2 255.255.255.252
+no shutdown
+
+ip dhcp excluded-address 192.168.1.1 192.168.1.9
+ip dhcp excluded-address 192.168.2.1 192.168.2.9
+ip dhcp excluded-address 192.168.3.1 192.168.3.9
+
+ip dhcp pool LAN1
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN2
+network 192.168.2.0 255.255.255.0
+default-router 192.168.2.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN3
+network 192.168.3.0 255.255.255.0
+default-router 192.168.3.1
+dns-server 8.8.8.8
+
+router rip
+version 2
+no auto-summary
+network 192.168.1.0
+network 192.168.2.0
+network 192.168.3.0
+network 10.0.0.0
+network 70.0.0.0
+
+end
+write memory
+
+*********CONFIGURACION DE ROUTER 2**********
+conf t 
+int G0/0
+ip address 192.168.4.1 255.255.255.0
+no shutdown
+
+int G0/1
+ip address 192.168.5.1 255.255.255.0
+no shutdown
+
+int G0/2
+ip address 192.168.6.1 255.255.255.0
+no shutdown
+
+int G0/0/0
+ip address 10.0.0.2 255.255.255.252
+no shutdown
+
+int G0/1/0
+ip address 20.0.0.1 255.255.255.252
+no shutdown
+
+int G0/2/0
+ip address 110.0.0.2 255.255.255.252
+no shutdown
+
+ip dhcp excluded-address 192.168.4.1 192.168.4.9
+ip dhcp excluded-address 192.168.5.1 192.168.5.9
+ip dhcp excluded-address 192.168.6.1 192.168.6.9
+
+ip dhcp pool LAN4
+network 192.168.4.0 255.255.255.0
+default-router 192.168.4.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN5
+network 192.168.5.0 255.255.255.0
+default-router 192.168.5.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN6
+network 192.168.6.0 255.255.255.0
+default-router 192.168.6.1
+dns-server 8.8.8.8
+
+router rip
+version 2
+no auto-summary
+network 192.168.4.0
+network 192.168.5.0
+network 192.168.6.0
+network 10.0.0.0
+network 20.0.0.0
+network 110.0.0.0
+
+end
+write memory
+
+*********CONFIGURACION DE ROUTER 3**********
+conf t 
+int G0/0
+ip address 192.168.7.1 255.255.255.0
+no shutdown
+
+int G0/1
+ip address 192.168.8.1 255.255.255.0
+no shutdown
+
+int G0/2
+ip address 192.168.9.1 255.255.255.0
+no shutdown
+
+int G0/0/0
+ip address 20.0.0.2 255.255.255.252
+no shutdown
+
+int G0/1/0
+ip address 30.0.0.1 255.255.255.252
+no shutdown
+
+int G0/2/0
+ip address 100.0.0.2 255.255.255.252
+no shutdown
+
+int G0/3/0
+ip address 90.0.0.2 255.255.255.252
+no shutdown
+
+ip dhcp excluded-address 192.168.7.1 192.168.7.9
+ip dhcp excluded-address 192.168.8.1 192.168.8.9
+ip dhcp excluded-address 192.168.9.1 192.168.9.9
+
+ip dhcp pool LAN7
+network 192.168.7.0 255.255.255.0
+default-router 192.168.7.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN8
+network 192.168.8.0 255.255.255.0
+default-router 192.168.8.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN9
+network 192.168.9.0 255.255.255.0
+default-router 192.168.9.1
+dns-server 8.8.8.8
+
+router rip
+version 2
+no auto-summary
+network 192.168.7.0
+network 192.168.8.0
+network 192.168.9.0
+network 20.0.0.0
+network 30.0.0.0
+network 100.0.0.0
+network 90.0.0.0
+
+end
+write memory
+
+*********CONFIGURACION DE ROUTER 4**********
+conf t
+int G0/0
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+
+int G0/1
+ip address 192.168.11.1 255.255.255.0
+no shutdown
+
+int G0/2
+ip address 192.168.12.1 255.255.255.0
+no shutdown
+
+int G0/0/0
+ip address 30.0.0.2 255.255.255.252
+no shutdown
+
+int G0/1/0
+ip address 40.0.0.1 255.255.255.252
+no shutdown
+
+int G0/2/0
+ip address 80.0.0.2 255.255.255.252
+no shutdown
+
+ip dhcp excluded-address 192.168.10.1 192.168.10.9
+ip dhcp excluded-address 192.168.11.1 192.168.11.9
+ip dhcp excluded-address 192.168.12.1 192.168.12.9
+
+ip dhcp pool LAN10
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN11
+network 192.168.11.0 255.255.255.0
+default-router 192.168.11.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN12
+network 192.168.12.0 255.255.255.0
+default-router 192.168.12.1
+dns-server 8.8.8.8
+
+router rip
+version 2
+no auto-summary
+network 192.168.10.0
+network 192.168.11.0
+network 192.168.12.0
+network 30.0.0.0
+network 40.0.0.0
+network 80.0.0.0
+
+end
+write memory
+
+*********CONFIGURACION DE ROUTER 5**********
+conf t 
+int G0/0
+ip address 192.168.13.1 255.255.255.0
+no shutdown
+
+int G0/1
+ip address 192.168.14.1 255.255.255.0
+no shutdown
+
+int G0/2
+ip address 192.168.15.1 255.255.255.0
+no shutdown
+
+int G0/0/0
+ip address 40.0.0.2 255.255.255.252
+no shutdown
+
+int G0/1/0
+ip address 50.0.0.1 255.255.255.252
+no shutdown
+
+ip dhcp excluded-address 192.168.13.1 192.168.13.9
+ip dhcp excluded-address 192.168.14.1 192.168.14.9
+ip dhcp excluded-address 192.168.15.1 192.168.15.9
+
+ip dhcp pool LAN13
+network 192.168.13.0 255.255.255.0
+default-router 192.168.13.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN14
+network 192.168.14.0 255.255.255.0
+default-router 192.168.14.1
+dns-server 8.8.8.8
+
+ip dhcp pool LAN15
+network 192.168.15.0 255.255.255.0
+default-router 192.168.15.1
+dns-server 8.8.8.8
+
+router rip
+version 2
+no auto-summary
+network 192.168.13.0
+network 192.168.14.0
+network 192.168.15.0
+network 40.0.0.0
+network 60.0.0.0
+
+end
+write memory
+
+*********CONFIGURACION DE ROUTER 6**********
+conf t 
+int G0/0/0
+ip address 50.0.0.2 255.255.255.252
+no shutdown
+
+int G0/1/0
+ip address 60.0.0.1 255.255.255.252
+no shutdown
+
+int G0/2/0
+ip address 80.0.0.1 255.255.255.252
+no shutdown
+
+int G0/3/0
+ip address 90.0.0.1 255.255.255.252
+no shutdown
+
+router rip
+version 2
+no auto-summary
+network 50.0.0.0
+network 60.0.0.0
+network 80.0.0.0
+network 90.0.0.0
+
+end
+write memory
+
+*********CONFIGURACION DE ROUTER 7**********
+conf t 
+int G0/0/0
+ip address 60.0.0.2 255.255.255.252
+no shutdown
+
+int G0/1/0
+ip address 70.0.0.1 255.255.255.252
+no shutdown
+
+int G0/2/0
+ip address 110.0.0.1 255.255.255.252
+no shutdown
+
+int G0/3/0
+ip address 100.0.0.1 255.255.255.252
+no shutdown
+
+router rip
+version 2
+no auto-summary
+network 60.0.0.0
+network 70.0.0.0
+network 110.0.0.0
+network 100.0.0.0
+
+end
+write memory
+
+************CONFIGURACION DE SWITCHES**********
+enable
+configure terminal
+hostname SW1
+no ip domain-lookup
+ip domain-name UGB.com
+username erick privilege 15 secret !3R-149658
+username isabel privilege 15 secret $Y0-154831
+username karen privilege 15 secret %K4-198420
+username moises privilege 15 secret &M0-209654
+service password-encryption
+enable secret cisco
+crypto key generate rsa
+512
+ip ssh version 2
+line console 0
+login local
+exec-timeout 5 0
+logging synchronous
+exit
+line vty 0 4
+transport input ssh
+login local
+exec-timeout 5 0
+exit
+interface vlan1
+no shut
+ip add 192.168.20.2 255.255.255.0
+exit
+ip default-gateway 192.168.20.1
+end

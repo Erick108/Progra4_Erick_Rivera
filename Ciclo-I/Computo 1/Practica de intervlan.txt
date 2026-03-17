@@ -1,0 +1,285 @@
+Router 1
+R1
+enable
+configure terminal
+
+hostname R1
+no ip domain-lookup
+
+!========================
+! INTERFAZ HACIA WAN / OTRO ROUTER
+!========================
+interface g0/1
+ ip address 10.0.0.1 255.255.255.252
+ no shutdown
+exit
+
+!========================
+! INTERFAZ TRONCAL HACIA SWITCH
+!========================
+interface g0/0
+ no shutdown
+exit
+
+!========================
+! SUBINTERFACES (ROUTER-ON-A-STICK)
+!========================
+interface g0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+
+interface g0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+
+interface g0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.0
+
+interface g0/0.40
+ encapsulation dot1Q 40
+ ip address 192.168.40.1 255.255.255.0
+
+interface g0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.0
+exit
+
+!========================
+! RIP v2
+!========================
+router rip
+ version 2
+ no auto-summary
+ network 10.0.0.0
+ network 192.168.10.0
+ network 192.168.20.0
+ network 192.168.30.0
+ network 192.168.40.0
+ network 192.168.50.0
+exit
+
+!========================
+! DHCP
+!========================
+ip dhcp excluded-address 192.168.10.1 192.168.10.9
+ip dhcp excluded-address 192.168.20.1 192.168.20.9
+ip dhcp excluded-address 192.168.30.1 192.168.30.9
+ip dhcp excluded-address 192.168.40.1 192.168.40.9
+ip dhcp excluded-address 192.168.50.1 192.168.50.9
+
+ip dhcp pool LAN10
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 172.16.0.10
+exit
+
+ip dhcp pool LAN20
+ network 192.168.20.0 255.255.255.0
+ default-router 192.168.20.1
+ dns-server 172.16.0.10
+exit
+
+ip dhcp pool LAN30
+ network 192.168.30.0 255.255.255.0
+ default-router 192.168.30.1
+ dns-server 172.16.0.10
+exit
+
+ip dhcp pool LAN40
+ network 192.168.40.0 255.255.255.0
+ default-router 192.168.40.1
+ dns-server 172.16.0.10
+exit
+
+ip dhcp pool LAN50
+ network 192.168.50.0 255.255.255.0
+ default-router 192.168.50.1
+ dns-server 172.16.0.10
+exit
+
+end
+copy running-config startup-config
+**************
+***************
+
+Segundo Router 
+
+enable
+configure terminal
+
+hostname R2
+no ip domain-lookup
+
+!========================
+! ENLACE HACIA R1
+!========================
+interface g0/0
+ ip address 10.0.0.2 255.255.255.252
+ no shutdown
+exit
+
+!========================
+! RED LOCAL / SERVIDOR
+!========================
+interface g0/1
+ ip address 172.16.0.1 255.255.255.0
+ no shutdown
+exit
+
+!========================
+! RIP v2
+!========================
+router rip
+ version 2
+ no auto-summary
+ network 10.0.0.0
+ network 172.16.0.0
+exit
+
+end
+copy running-config startup-config
+
+*********
+*********
+primer Switch 
+SW1
+
+enable
+configure terminal
+
+hostname SW1
+no ip domain-lookup
+
+!========================
+! CREACIÓN DE VLAN
+!========================
+vlan 10
+ name Red1
+vlan 20
+ name Red2
+vlan 30
+ name Red3
+vlan 40
+ name Red4
+vlan 50
+ name Red5
+exit
+
+!========================
+! CONFIGURACIÓN VTP
+!========================
+vtp domain UGB.com
+vtp mode server
+vtp password abcdabcdab
+vtp version 2
+
+!========================
+! CONFIGURACIÓN TRUNK
+!========================
+interface range g0/1-2
+ switchport mode trunk
+exit
+
+interface f0/24
+ switchport mode trunk
+exit
+
+end
+write memory
+
+
+
+
+
+Segundo SW2
+
+enable
+configure terminal
+
+hostname SW2
+no ip domain-lookup
+
+!========================
+! CONFIGURACIÓN VTP
+!========================
+vtp domain UGB.com
+vtp password abcdabcdab
+vtp mode client
+vtp version 2
+
+!========================
+! CONFIGURACIÓN TRUNK HACIA SW1
+!========================
+interface range g0/1-2
+ switchport mode trunk
+ no shutdown
+exit
+
+!========================
+! OPCIONAL: PUERTO HACIA OTRO SWITCH O ROUTER
+!========================
+interface f0/24
+ switchport mode trunk
+ no shutdown
+exit
+
+end
+copy running-config startup-config
+
+
+
+
+tercer SW3 
+enable
+configure terminal
+
+hostname SW3
+no ip domain-lookup
+
+!========================
+! CONFIGURACIÓN VTP
+!========================
+vtp domain UGB.com
+vtp password abcdabcdab
+vtp mode client
+vtp version 2
+
+!========================
+! CONFIGURACIÓN TRUNK
+! (Enlaces hacia otros switches)
+!========================
+interface range g0/1-2
+ switchport mode trunk
+ no shutdown
+exit
+
+!========================
+! PUERTOS ACCESS
+!========================
+interface f0/1
+ switchport mode access
+ switchport access vlan 10
+
+interface f0/2
+ switchport mode access
+ switchport access vlan 20
+
+interface f0/3
+ switchport mode access
+ switchport access vlan 30
+
+interface f0/4
+ switchport mode access
+ switchport access vlan 40
+
+interface f0/5
+ switchport mode access
+ switchport access vlan 50
+
+!========================
+! GUARDAR CONFIGURACIÓN
+!========================
+end
+copy running-config startup-config
+

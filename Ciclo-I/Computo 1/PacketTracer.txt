@@ -1,10 +1,13 @@
 ******CONFIGURACION DE ROUTER 2911********
 enable
 configure terminal
-hostname R2
+hostname R1
 no ip domain-lookup
 ip domain-name UGB.com
-username erick privilege 15 secret acdefg1234
+username erick privilege 15 secret 149658
+username isabel privilege 15 secret 154831
+username karen privilege 15 secret 198420
+username moises privilege 15 secret 209654
 service password-encryption
 enable secret cisco
 crypto key generate rsa
